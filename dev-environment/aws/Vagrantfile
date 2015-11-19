@@ -26,7 +26,7 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "composer-setup-dev-enviroment"
+  config.vm.box = "composer-setup-dev-enviroment-tests"
   config.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
 
   # please note - in aws provider the flag is NOT rsync__exclude but instead rsync_exclude (single underscore, not double)
@@ -52,7 +52,6 @@ Vagrant.configure("2") do |config|
         'Name' => 'composer-dev-env'
     }
 
-    puts "this is group_id :: " + ENV['COMPOSER_SECURITY_GROUP_ID']
     aws.security_groups = ENV['COMPOSER_SECURITY_GROUP_ID']
     aws.associate_public_ip = true
     aws.subnet_id = ENV['COMPOSER_SUBNET_ID']
