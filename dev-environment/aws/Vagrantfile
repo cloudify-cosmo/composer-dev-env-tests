@@ -43,15 +43,21 @@ Vagrant.configure("2") do |config|
     aws.secret_access_key = ENV['COMPOSER_ACCESS_KEY']
     aws.keypair_name = 'composer'
 
-    aws.region = 'eu-west-1'
+    aws.region = 'us-east-1'
     aws.instance_type = 'm3.large'
-    aws.ami = 'ami-47a23a30' # ubuntu
+    # aws.ami = 'ami-47a23a30' # ubuntu-ireland
+    aws.ami = 'ami-d05e75b8' # ubuntu-us
 
     aws.tags = {
         'Name' => 'composer-dev-env'
     }
 
-    override.ssh.username = 'centos'
+    puts "this is group_id :: " + ENV['COMPOSER_SECURITY_GROUP_ID']
+    aws.security_groups = ENV['COMPOSER_SECURITY_GROUP_ID']
+    aws.associate_public_ip = true
+    aws.subnet_id = ENV['COMPOSER_SUBNET_ID']
+
+    override.ssh.username = 'ubuntu'
     override.ssh.private_key_path = './dev/composer.pem'
     # http://stackoverflow.com/questions/33098913/vagrant-fails-to-get-machine-up-throwing-keep-getting-an-error-prompt-undef?noredirect=1#comment54025480_33098913
     override.ssh.insert_key = false
