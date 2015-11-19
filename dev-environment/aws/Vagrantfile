@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
     aws.region = 'eu-west-1'
     aws.instance_type = 'm3.large'
     aws.user_data = "#!/bin/bash\nsed -i -e 's/^Defaults.*requiretty/# Defaults requiretty/g' /etc/sudoers"
-    aws.ami = 'ami-e4ff5c93'
+    aws.ami = 'ami-47a23a30' # ubuntu
 
     aws.tags = {
         'Name' => 'composer-dev-env'
